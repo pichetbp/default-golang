@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"default-repo/helpers"
 	"default-repo/libs/log/models"
 	"os"
 	"time"
@@ -10,6 +11,8 @@ import (
 )
 
 var LogEntry LogEntryInterface
+
+const jsonFild = "jsonField"
 
 type LogEntryInterface interface {
 	OnInfo(args models.LogInfo)
@@ -38,31 +41,35 @@ func NewLogEntry(level logrus.Level, defaultLog models.LogDefault) LogEntryInter
 		log:        log,
 		defaultLog: defaultLog,
 	}
-
 	return LogEntry
 }
 
 func (l *logEntry) OnInfo(args models.LogInfo) {
 	args.LogDefault = l.defaultLog
-	l.log.Info(args)
+	args.FileLocation = helpers.SetFileLocation()
+	l.log.WithField(jsonFild, args).Info()
 }
 
 func (l *logEntry) OnDebug(args models.LogDebug) {
 	args.LogDefault = l.defaultLog
-	l.log.Debug(args)
+	args.FileLocation = helpers.SetFileLocation()
+	l.log.WithField(jsonFild, args).Debug()
 }
 
 func (l *logEntry) OnError(args models.LogError) {
 	args.LogDefault = l.defaultLog
-	l.log.Error(args)
+	args.FileLocation = helpers.SetFileLocation()
+	l.log.WithField(jsonFild, args).Error()
 }
 
 func (l *logEntry) OnExternal(args models.LogExternal) {
 	args.LogDefault = l.defaultLog
-	l.log.Info(args)
+	args.FileLocation = helpers.SetFileLocation()
+	l.log.WithField(jsonFild, args).Info()
 }
 
 func (l *logEntry) OnQuery(args models.LogQuery) {
 	args.LogDefault = l.defaultLog
-	l.log.Info(args)
+	args.FileLocation = helpers.SetFileLocation()
+	l.log.WithField(jsonFild, args).Info()
 }

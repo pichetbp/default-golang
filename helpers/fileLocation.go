@@ -6,10 +6,9 @@ import (
 )
 
 func SetFileLocation() string {
-	_, file, line, ok := runtime.Caller(1)
+	_, file, line, ok := runtime.Caller(2)
 	if !ok {
 		return ""
 	}
 	return StringBuild([]string{file, ":", strconv.Itoa(line)})
-
 }
