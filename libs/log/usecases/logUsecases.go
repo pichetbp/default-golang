@@ -45,31 +45,46 @@ func NewLogEntry(level logrus.Level, defaultLog models.LogDefault) LogEntryInter
 }
 
 func (l *logEntry) OnInfo(args models.LogInfo) {
+	// set default log
 	args.LogDefault = l.defaultLog
 	args.FileLocation = helpers.SetFileLocation()
+	args.Level = "info"
+
 	l.log.WithField(jsonFild, args).Info()
 }
 
 func (l *logEntry) OnDebug(args models.LogDebug) {
+	// set default log
 	args.LogDefault = l.defaultLog
 	args.FileLocation = helpers.SetFileLocation()
+	args.Level = "debug"
+
 	l.log.WithField(jsonFild, args).Debug()
 }
 
 func (l *logEntry) OnError(args models.LogError) {
+	// set default log
 	args.LogDefault = l.defaultLog
 	args.FileLocation = helpers.SetFileLocation()
+	args.Level = "error"
+
 	l.log.WithField(jsonFild, args).Error()
 }
 
 func (l *logEntry) OnExternal(args models.LogExternal) {
+	// set default log
 	args.LogDefault = l.defaultLog
 	args.FileLocation = helpers.SetFileLocation()
+	args.Level = "info"
+
 	l.log.WithField(jsonFild, args).Info()
 }
 
 func (l *logEntry) OnQuery(args models.LogQuery) {
+	// set default log
 	args.LogDefault = l.defaultLog
 	args.FileLocation = helpers.SetFileLocation()
+	args.Level = "info"
+
 	l.log.WithField(jsonFild, args).Info()
 }
